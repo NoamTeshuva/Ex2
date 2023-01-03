@@ -1,10 +1,10 @@
-Ex2_1
-This program contains three methods for counting the number of lines in an array of text files.
+#Ex2_1
+##This program contains three methods for counting the number of lines in an array of text files.
 
-createTextFiles(int n, int seed, int bound)
+##createTextFiles(int n, int seed, int bound)
 This method creates a specified number of text files with random content.
 
-Parameters
+######Parameters
 
 n: the number of files to create
 seed: the seed for the random number generator
