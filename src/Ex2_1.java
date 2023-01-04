@@ -36,6 +36,20 @@ public class Ex2_1 {
         return fileArr;
     }
 
+    public static int readSumFile(String file) {
+        int numOfLines = 0;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            while (reader.readLine() != null) {
+                numOfLines++;
+            }
+            reader.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return numOfLines;
+    }
+
     /**
      * Returns the number of lines in the specified array of files.
      *
@@ -45,15 +59,7 @@ public class Ex2_1 {
     public static int getNumOfLines(String[] fileNames) {
         int numOfLines = 0;
         for (int i = 0; i < fileNames.length; i++) {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(fileNames[i]));
-                while (reader.readLine() != null) {
-                    numOfLines++;
-                }
-                reader.close();
-            } catch (Exception e) {
-                e.getStackTrace();
-            }
+            numOfLines = numOfLines + readSumFile(fileNames[i]);
         }
         return numOfLines - fileNames.length;
     }
@@ -73,14 +79,7 @@ public class Ex2_1 {
 
         @Override
         public void run() {
-            int lineCount = 0;
-            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-                while (reader.readLine() != null) {
-                    lineCount++;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            int lineCount = readSumFile(fileName);
             this.lineCountCons = lineCount;
         }
 
@@ -95,21 +94,28 @@ public class Ex2_1 {
      * @param fileNames an array of file names
      * @return the number of lines in the files
      */
-    public static int getNumOfLinesThreads(String[] fileNames)  {
+    public static int getNumOfLinesThreads(String[] fileNames) {
         int count = fileNames.length, i = 0, numOfLines = 0;
+        fileThread[] arr = new fileThread[count];
         while (i < count) {
             fileThread file = new fileThread(fileNames[i]);
+            arr[i] = file;
             file.start();
+            i++;
+        }
+        i = 0;
+        while (i < count) {
             try {
-                file.join();
+                arr[i].join();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            numOfLines = numOfLines + file.getLineCount();
+            numOfLines = numOfLines + arr[i].getLineCount();
             i++;
         }
-        return numOfLines - fileNames.length;
+        return numOfLines;
     }
+
     /**
      * A Callable task that counts the number of lines in a file.
      */
@@ -122,14 +128,7 @@ public class Ex2_1 {
 
         @Override
         public Integer call() throws Exception {
-            int lineCount = 0;
-            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-                while (reader.readLine() != null) {
-                    lineCount++;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            int lineCount = readSumFile(fileName);
             return lineCount;
         }
     }
@@ -143,7 +142,7 @@ public class Ex2_1 {
      * @throws InterruptedException if the current thread was interrupted while waiting
      */
     public static int getNumOfLinesThreadPool(String[] fileNames) throws ExecutionException, InterruptedException {
-     int poolSize= fileNames.length;
+        int poolSize = fileNames.length;
         ExecutorService executor = Executors.newFixedThreadPool(poolSize);
         List<Future<Integer>> futures = new ArrayList<>();
         for (String fileName : fileNames) {
@@ -159,8 +158,9 @@ public class Ex2_1 {
         return sumOfLines - fileNames.length;
     }
 
-    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ExecutionException, InterruptedException {
-        String[] fileNames = Ex2_1.createTextFiles(100, 4, 10);
+    public static void main(String[] args) throws
+            FileNotFoundException, UnsupportedEncodingException, ExecutionException, InterruptedException {
+        String[] fileNames = Ex2_1.createTextFiles(500, 4, 20);
 
         // Measure the execution time of the getNumOfLines() method
         long startTime = System.currentTimeMillis();
@@ -168,6 +168,7 @@ public class Ex2_1 {
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
         System.out.println("Elapsed time for getNumOfLines(): " + elapsedTime + " milliseconds");
+
 
         // Measure the execution time of the getNumOfLinesThreads() method
         startTime = System.currentTimeMillis();
@@ -182,6 +183,8 @@ public class Ex2_1 {
         endTime = System.currentTimeMillis();
         elapsedTime = endTime - startTime;
         System.out.println("Elapsed time for getNumOfLinesThreadPool(): " + elapsedTime + " milliseconds");
+
+
     }
 }
 
