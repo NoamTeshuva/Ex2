@@ -67,4 +67,19 @@ Elapsed time for getNumOfLinesThreadPool(): 541 milliseconds
 
 
 # Ex2_2
+This code provides a custom implementation of thread pool and task management in Java. It includes the following classes:
+
+CustomExecutor: a custom thread pool that creates a thread pool with a minimum of half of the number of cores on the system minus 1 and a maximum of the number of cores minus 1. It uses a PriorityBlockingQueue to hold the tasks that are submitted to it. It also has methods to submit tasks, gracefully terminate the thread pool, and get the current max priority value.
+Task: a custom implementation of the FutureTask class in Java. It accepts a callable object and a task type. It also implements the Comparable interface, and the compareTo method compares tasks based on their priority values.
+TaskType: an enumeration that contains different types of tasks, each with a different priority value. It has methods to get and set the priority value, get the task type, and validate the priority.
+Usage
+
+## using adapter design pattern
+The Adapter design pattern is a structural pattern that allows objects with incompatible interfaces to work together. It is used to convert the interface of a class into another interface that the client expects. The Adapter pattern allows the client to call methods on the adapter that are then translated to calls on the adaptee class.
+
+In the provided code, the Adapter pattern is used to adapt the Callable interface to the custom Task class. The Task class is a custom implementation of the FutureTask class with added functionality for task types and priority values. The submit() method of the CustomExecutor class is overridden to accept tasks of the custom Task class and use the task's priority value to sort the tasks in the queue. The Task.createTask(Callable<T> operation, TaskType type) factory method is used to create an instance of the Task class and adapt a Callable object to it. This allows the CustomExecutor to use the custom Task class while still being able to accept Callable objects as tasks.
+  
+ ## using a factory method 
+  The Factory Method design pattern is a creational pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created. In the provided code, the Factory Method design pattern is used in the Task class to create an instance of the Task class and adapt a Callable object to it. The Task.createTask(Callable<T> operation, TaskType type) factory method is used to create an instance of the Task class, it takes a Callable object and a TaskType enumeration as input. The method wraps the Callable object within a Task instance and assigns the passed TaskType to it. This allows for a simplified and flexible way for creating Task objects and ensures that all Task objects created with this method have a TaskType and a Callable operation associated with it.
+
 ![alt text](https://user-images.githubusercontent.com/117913057/212170096-e2e23fa2-d340-4589-9d6b-438de015fd25.png)
