@@ -52,4 +52,4 @@ ExecutionException: if the computation threw an exception
 InterruptedException: if the current thread was interrupted while waiting
 callCountLines
 This is a Callable task that counts the number of lines in a file. It is used by the getNumOfLinesThreadPool method.![ex2_1]
-(https://user-images.githubusercontent.com/117913057/212166599-7cc52ec1-0e22-4ee1-903a-831639ed603a.png)
+![alt text](https://user-images.githubusercontent.com/117913057/212166599-7cc52ec1-0e22-4ee1-903a-831639ed603a.png)
