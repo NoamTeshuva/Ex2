@@ -67,3 +67,4 @@ Elapsed time for getNumOfLinesThreadPool(): 541 milliseconds
 
 
 # Ex2_2
+![alt text](https://user-images.githubusercontent.com/117913057/212170096-e2e23fa2-d340-4589-9d6b-438de015fd25.png)
