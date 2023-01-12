@@ -58,7 +58,9 @@ The performance of executing regular tasks can be improved by using threads. Thr
 A thread pool takes this a step further by pre-instantiating a group of reusable threads, reducing the overhead associated with creating and destroying threads. The "getNumOfLinesThreadPool()" test in the provided example had an elapsed time of 541 milliseconds, which is faster than using regular thread, but slower than using a Thread pool. This demonstrates the added benefits of using a thread pool in terms of performance.
 
 Elapsed time for getNumOfLines(): 3874 milliseconds
+
 Elapsed time for getNumOfLinesThreads(): 416 milliseconds
+
 Elapsed time for getNumOfLinesThreadPool(): 541 milliseconds
 
 ![alt text](https://user-images.githubusercontent.com/117913057/212166599-7cc52ec1-0e22-4ee1-903a-831639ed603a.png)
