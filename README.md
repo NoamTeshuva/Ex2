@@ -52,4 +52,10 @@ ExecutionException: if the computation threw an exception
 InterruptedException: if the current thread was interrupted while waiting
 callCountLines
 This is a Callable task that counts the number of lines in a file. It is used by the getNumOfLinesThreadPool method.![ex2_1]
+
+## outcome&& what we learned
+The performance of executing regular tasks can be improved by using threads. Threads allow for multiple tasks to be executed simultaneously, reducing the overall processing time. In the provided example, the elapsed time for the task "getNumOfLines()" was 3874 milliseconds. However, when using threads, the same task was completed in 416 milliseconds, as seen in the "getNumOfLinesThreads()" test. This represents a significant improvement in performance.
+A thread pool takes this a step further by pre-instantiating a group of reusable threads, reducing the overhead associated with creating and destroying threads. The "getNumOfLinesThreadPool()" test in the provided example had an elapsed time of 541 milliseconds, which is faster than using regular thread, but slower than using a Thread pool. This demonstrates the added benefits of using a thread pool in terms of performance.
+
+
 ![alt text](https://user-images.githubusercontent.com/117913057/212166599-7cc52ec1-0e22-4ee1-903a-831639ed603a.png)
