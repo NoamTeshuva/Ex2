@@ -1,4 +1,4 @@
-# Ex2
+# Ex2_1
 This program contains three methods for counting the number of lines in an array of text files.
 
 ## createTextFiles(int n, int seed, int bound)
@@ -64,3 +64,6 @@ Elapsed time for getNumOfLinesThreads(): 416 milliseconds
 Elapsed time for getNumOfLinesThreadPool(): 541 milliseconds
 
 ![alt text](https://user-images.githubusercontent.com/117913057/212166599-7cc52ec1-0e22-4ee1-903a-831639ed603a.png)
+
+
+# Ex2_2
