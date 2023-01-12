@@ -79,7 +79,15 @@ The Adapter design pattern is a structural pattern that allows objects with inco
 
 In the provided code, the Adapter pattern is used to adapt the Callable interface to the custom Task class. The Task class is a custom implementation of the FutureTask class with added functionality for task types and priority values. The submit() method of the CustomExecutor class is overridden to accept tasks of the custom Task class and use the task's priority value to sort the tasks in the queue. The Task.createTask(Callable<T> operation, TaskType type) factory method is used to create an instance of the Task class and adapt a Callable object to it. This allows the CustomExecutor to use the custom Task class while still being able to accept Callable objects as tasks.
   
+    ## using SOLID desgin pattern
+  In the provided code, SOLID principles are implemented to ensure maintainability and extensibility of the code. The Single Responsibility Principle is applied by ensuring that each class has a single, well-defined responsibility. The Task class has the single responsibility of executing a Callable operation and providing additional functionality for task types and priority values. The CustomExecutor class also has a single responsibility of managing the execution of tasks, submitting tasks, and sorting the tasks based on their priority values.
+
+Additionally, the Factory Method pattern is used in the Task class to create instances of the Task class and adapt a Callable object to it. This helps in adhering to the Open-Closed Principle, which states that a class should be open for extension but closed for modification. This pattern allows for creating new objects without modifying the existing ones and making the code more extensible.
+  
  ## using a factory method 
   The Factory Method design pattern is a creational pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created. In the provided code, the Factory Method design pattern is used in the Task class to create an instance of the Task class and adapt a Callable object to it. The Task.createTask(Callable<T> operation, TaskType type) factory method is used to create an instance of the Task class, it takes a Callable object and a TaskType enumeration as input. The method wraps the Callable object within a Task instance and assigns the passed TaskType to it. This allows for a simplified and flexible way for creating Task objects and ensures that all Task objects created with this method have a TaskType and a Callable operation associated with it.
 
+
+  
+  
 ![alt text](https://user-images.githubusercontent.com/117913057/212170096-e2e23fa2-d340-4589-9d6b-438de015fd25.png)
